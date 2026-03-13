@@ -1,6 +1,6 @@
 import { login } from "@/src/controllers/authController";
 
-const allowedOrigin = "https://fullstack-vue-next-73kh.vercel.app"
+const allowedOrigin = "https://fullstack-vue-next-hjqi.vercel.app"
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": allowedOrigin,
