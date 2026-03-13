@@ -1,6 +1,7 @@
 <script setup>
   import { ref } from "vue";
-  import axios from "axios";
+  // import axios from "axios";
+  import api from "@/services/api";
 
   const name = ref("");
   const email = ref("");
@@ -12,7 +13,7 @@
     errorMessage.value = "";
     successMessage.value = "";
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/register", {
+      const res = await api.post("/api/auth/register", {
         name: name.value,
         email: email.value,
         password: password.value,
