@@ -1,7 +1,19 @@
 import { PrismaClient } from "@prisma/client"
+import { Pool } from "pg"
+import { PrismaPg } from "@prisma/adapter-pg"
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+})
+
+const adapter = new PrismaPg(pool)
 
 const prisma = new PrismaClient({
-  log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+  adapter,
+  log:
+    process.env.NODE_ENV === "development"
+      ? ["query", "error", "warn"]
+      : ["error"],
 })
 
 const connectDB = async () => {
@@ -9,7 +21,7 @@ const connectDB = async () => {
     await prisma.$connect()
     console.log("DB Terhubung via Prisma")
   } catch (error) {
-    console.error("Database gagal terhubung:", error.message)
+    console.log("Database gagal terhubung:", error.message)
     process.exit(1)
   }
 }
